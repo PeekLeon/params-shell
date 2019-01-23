@@ -14,8 +14,8 @@ parameter_construction(){
 	## REGEX PARAM LIST : TYPE / NOT_NULL
 	local regExParamType="(type_)([[:alnum:]]*)(=)(.*)"
 	local regExParamNotNull="(not_null)(=)(.*)"
-      
-    ## REGEX PARAM LIST : MANDATORY
+    
+	## REGEX PARAM LIST : MANDATORY
 	local regExParamMandatory="(mandatory)(=)(.*)"
 		
 	## REGEX PARAM
@@ -30,9 +30,10 @@ parameter_construction(){
 	aRegExParamType[mail]="^([A-Za-z]+[A-Za-z0-9]*((\.|\-|\_)?[A-Za-z]+[A-Za-z0-9]*){1,})@(([A-Za-z]+[A-Za-z0-9]*)+((\.|\-|\_)?([A-Za-z]+[A-Za-z0-9]*)+){1,})+\.([A-Za-z]{2,})+"
 	
 	## USING THE CONFIGATION FILE TO ADD TYPES OF PARAMS
-	for FIC in `ls /var/lib/params-shell/* 2>/dev/null |grep -v *.conf`;do
+	for FIC in /var/lib/params-shell/*.conf;do
+		[[ -e "${FIC}" ]] || break # handle the case of no *.conf files
 		local regExConfType="^([Tt][Yy][Pp][Ee]_)([a-zA-Z]*)$"
-		while IFS='=' read parameter value other
+		while IFS='=' read -r parameter value other
 		do line="$parameter $value $other"
 			if [[ $parameter =~ ${regExConfType} ]];then
 				aRegExParamType[${parameter:5}]=${value}
@@ -45,13 +46,13 @@ parameter_construction(){
 		if [[ $myParam_Type_NotNull =~ ${regExParamType} ]]; then
 			IFS='=' read -ra splitParamType <<< "$myParam_Type_NotNull"			
 			IFS=',' read -ra splitParamTypeVal <<< "${splitParamType[1]}"
-			for myParamTypeVal in ${splitParamTypeVal[@]}; do
+			for myParamTypeVal in "${splitParamTypeVal[@]}"; do
 				PARAM_TYPE[$myParamTypeVal]=${splitParamType[0]:5}
 			done
 		elif [[ $myParam_Type_NotNull =~ ${regExParamNotNull} ]]; then
 			IFS='=' read -ra splitParamNotNull <<< "$myParam_Type_NotNull"			
 			IFS=',' read -ra splitParamNotNullVal <<< "${splitParamNotNull[1]}"
-			for myParamTNotNullVal in ${splitParamNotNullVal[@]}; do
+			for myParamTNotNullVal in "${splitParamNotNullVal[@]}"; do
 				PARAM_NOT_NULL[$myParamTNotNullVal]=true
 			done
 		fi
@@ -61,9 +62,9 @@ parameter_construction(){
 	for myParam in "$@"; do
 		if [[ ! $myParam =~ ${regExParamType} ]] && [[ ! $myParam =~ ${regExParamNotNull} ]] && [[ ! $myParam =~ ${regExParamMandatory} ]]; then
 			if [[ $myParam =~ ${regExParamVal} ]]; then
-				splitParamVal[0]=$(echo $myParam | cut -d \= -f 1)
+				splitParamVal[0]=$(echo "${myParam}" | cut -d '=' -f 1)
 				local lengthParam=${#splitParamVal[0]}
-				let "lengthParam += 1"
+				(( lengthParam++ ))
 				splitParamVal[1]=${myParam:$lengthParam}
 				PARAM[${splitParamVal[0]:2}]=${splitParamVal[1]}
 	
@@ -74,7 +75,7 @@ parameter_construction(){
 						paramError=1
 				fi
 	
-				if [[ ! -z "${PARAM_TYPE[${splitParamVal[0]:2}]}" ]]; then
+				if [[ -n "${PARAM_TYPE[${splitParamVal[0]:2}]}" ]]; then
 						if [[ ! ${splitParamVal[1]} =~ ${aRegExParamType[${PARAM_TYPE[${splitParamVal[0]:2}]}]} ]]; then
 								PARAMETER=${splitParamVal[0]}
 								PARAMETER_TYPE=${PARAM_TYPE[${splitParamVal[0]:2}]}
@@ -105,7 +106,7 @@ parameter_construction(){
 		if [[ $myParam_Mandatory =~ ${regExParamMandatory} ]]; then
 			IFS='=' read -ra splitParamMandatory <<< "$myParam_Mandatory"			
 			IFS=',' read -ra splitParamMandatoryVal <<< "${splitParamMandatory[1]}"
-			for myParamMandatoryVal in ${splitParamMandatoryVal[@]}; do
+			for myParamMandatoryVal in "${splitParamMandatoryVal[@]}"; do
 				if [[ -z "${PARAM[$myParamMandatoryVal]}" ]]; then
 					PARAMETER=$myParamMandatoryVal
 					echo $"Missing parameter: ${PARAMETER}"

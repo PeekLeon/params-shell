@@ -13,7 +13,7 @@ Ce script permet aussi d'avoir une syntaxe plus lisible pour les params / argume
 
 ## Utilisation
 
-Pour passer un paramètre à un script il faut utiliser la syntaxe suivante :**--monParam=monArgument**
+Pour passer un paramètre à un script il faut utiliser la syntaxe suivante : **--monParam=monArgument**
 
 exemple :
 

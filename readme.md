@@ -13,7 +13,7 @@ This script also allows to have a more readable syntax for params / arguments
 
 ## Use
 
-To pass a parameter to a script it is necessary to use the following syntax:**- myParam = myArgument**
+To pass a parameter to a script it is necessary to use the following syntax: **--myParam=myArgument**
 
 example:
 

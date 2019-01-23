@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# install script
+cp params-shell.sh /bin/params-shell
+
+# install conf
+mkdir /var/lib/params-shell/
+cp params-shell.conf /var/lib/params-shell/params-shell.conf
+
+# install lang
+cp po/FR/params-shell.mo /usr/share/locale/fr/LC_MESSAGES/params-shell.mo
+

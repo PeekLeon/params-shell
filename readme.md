@@ -13,7 +13,7 @@ This script also allows to have a more readable syntax for params / arguments
 
 ## Use
 
-To pass a parameter to a script it is necessary to use the following syntax: ** - myParam = myArgument **
+To pass a parameter to a script it is necessary to use the following syntax:**- myParam = myArgument**
 
 example:
 
@@ -23,23 +23,23 @@ myScript.sh --name="DOE" --mail="j.doe.dom.fr" --password="password" --age=42 --
 
 ## Integration
 
-** 1 - Installation **
+**1 - Installation**
 
-** Debian / Ubuntu (.deb) **
-
-In the near future ...
-
-** RedHat / Centos (.rpm) **
+**Debian / Ubuntu (.deb)**
 
 In the near future ...
 
-** Installation script **
+**RedHat / Centos (.rpm)**
+
+In the near future ...
+
+**Installation script**
 
 ```Bash
 ./install
 ```
 
-** 2 - Construction of params **
+**2 - Construction of params**
 
 example:
 
@@ -47,19 +47,19 @@ example:
 . params-shell "$@" mandatory=name,email,password type_mail=mail not_null=name,email,password type_bool=account_active type_int=age type_float=size
 ```
 
-** mandatory **: list of mandatory parameters (name, email, password)
+**mandatory**: list of mandatory parameters (name, email, password)
 
-** not_null **: list of params that must not be without argument (name, email, password)
+**not_null**: list of params that must not be without argument (name, email, password)
 
-** type_mail **: list of the parameters of type mail (mail)
+**type_mail**: list of the parameters of type mail (mail)
 
-** type_bool **: list of Boolean type parameters (active_account)
+**type_bool**: list of Boolean type parameters (active_account)
 
-** type_int **: list of parameters of type integer (age)
+**type_int**: list of parameters of type integer (age)
 
-** type_float **: list of params of type number with comma (size)
+**type_float**: list of params of type number with comma (size)
 
-** 3 - Using params **
+**3 - Using params**
 
 ```Bash
 echo ${PARAM[name]}
@@ -67,7 +67,7 @@ echo ${PARAM[mail]}
 echo ...
 ```
 
-Params no longer need to be passed in a specific order since they are named. This makes it easier to read scripts because we no longer have ** $ 1 $ 2 ... ** but ** ${PARAM[name]} ${PARAM[mail]} ... ** and also makes it easy to update scripts.
+Params no longer need to be passed in a specific order since they are named. This makes it easier to read scripts because we no longer have**$ 1 $ 2 ...**but**${PARAM[name]} ${PARAM[mail]} ...**and also makes it easy to update scripts.
 
 ## Default values
 

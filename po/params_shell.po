@@ -1,0 +1,11 @@
+msgid "Expected type for param ${PARAMETER}: ${PARAMETER_TYPE}"
+msgstr ""
+
+msgid "Parameter ${PARAMETER} must not be null"
+msgstr ""
+
+msgid "Invalid parameter: ${PARAMETER}"
+msgstr ""
+
+msgid "Missing parameter: ${PARAMETER}"
+msgstr ""

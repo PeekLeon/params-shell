@@ -1,6 +1,6 @@
 # PARAMS SHELL
 
-params_shell.sh allows the management of the parameters / arguments passed in the scripts.
+params-shell.sh allows the management of the parameters / arguments passed in the scripts.
 
 By including this script at the beginning of your it is then possible to define:
 

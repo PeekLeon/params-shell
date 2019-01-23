@@ -1,6 +1,6 @@
 # PARAMS SHELL
 
-params_shell.sh permet la gestion des paramètres / arguments passés dans les scripts.
+params-shell.sh permet la gestion des paramètres / arguments passés dans les scripts.
 
 En incluant ce script au début du votre il est alors possible de définir :
 
@@ -83,7 +83,7 @@ Dans cette exemple le param "compte_actif" aura pour valeur "false".
 
 ## Ajouter des types de params
 
-Il est possible d'ajouter ou de modifier des types de params dans le fichier de configuration "params_shell.conf" placé au même niveau que le script "params_shell.sh".
+Il est possible d'ajouter ou de modifier des types de params dans le fichier de configuration "params-shell.conf" placé au même niveau que le script "params-shell.sh".
 
 exemple :
 

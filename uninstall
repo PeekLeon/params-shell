@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# uninstall script
+rm -f /bin/params-shell
+
+# uninstall conf
+rm -Rf /var/lib/params-shell/
+
+# uninstall lang
+rm -f /usr/share/locale/fr/LC_MESSAGES/params-shell.mo
+

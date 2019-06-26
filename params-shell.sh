@@ -32,7 +32,7 @@ parameter_construction(){
 	## USING THE CONFIGATION FILE TO ADD TYPES OF PARAMS
 	for FIC in /var/lib/params-shell/*.conf;do
 		[[ -e "${FIC}" ]] || break # handle the case of no *.conf files
-		local regExConfType="^([Tt][Yy][Pp][Ee]_)([a-zA-Z]*)$"
+		local regExConfType="^([Tt][Yy][Pp][Ee]_)([a-zA-Z-_]*)$"
 		while IFS='=' read -r parameter value other
 		do line="$parameter $value $other"
 			if [[ $parameter =~ ${regExConfType} ]];then
